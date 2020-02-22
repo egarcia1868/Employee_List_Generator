@@ -4,17 +4,19 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-​
-const OUTPUT_DIR = path.resolve(__dirname, "output")
+
+const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 // let addMore = true;​
 
 const render = require("./lib/htmlRenderer");
-​
+
+let employeeList = [];
+
 const questions = [{
   type: "input",
   message: "What is your manager's name?",
-  name: "manager"
+  name: "manName"
 },{
   type: "input",
   message: "What is your manager's id?",
@@ -82,18 +84,20 @@ const engineerQuestions = [{
 
 function init() {
   inquirer
-  .prompt(questions.then((ans) => {
+  .prompt(questions).then((ans) => {
+    employeeList.push(new Manager(ans.manName, ans.manID, ans.manEmail, ans.manOffice));
     if (ans.empType === "Intern") {
       intQuestions();
-    } else if (ans.empType === "Engineer") {
+    } else if (ans.empType === "Engineer") {      
       engQuestions();
     }
-  }))
+  })
 }
 
 function intQuestions() {
   inquirer
-  .prompt(internQuestions.then((ans) => {
+  .prompt(internQuestions).then((ans) => {
+    employeeList.push(new Intern(ans.intName, ans.intID, ans.intEmail, ans.intSchool));
     if (ans.intEmpType === "Intern") {
       // generate and populate the class and go to next input
       intQuestions();
@@ -103,12 +107,13 @@ function intQuestions() {
     } else if (ans.intEmpType === "I don't want to add any more team members") {
       //move on to generate
     }
-  }))
+  })
 }
-​
-function engQuestions() {
+
+function engQuestions() {   
   inquirer
-  .prompt(engineerQuestions.then((ans) => {
+  .prompt(engineerQuestions).then((ans) => {
+    employeeList.push(new Engineer(ans.engName, ans.engID, ans.engEmail, ans.engGH));
     if (ans.engEmpType === "Intern") {
       // generate and populate the class and go to next input
       intQuestions();
@@ -118,25 +123,27 @@ function engQuestions() {
     } else if (ans.engEmpType === "I don't want to add any more team members") {
       //move on to generate
     }
-  }))
+  })
 }
+
+init();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-​
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-​
+
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
-​
+
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
-​
+
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an 
