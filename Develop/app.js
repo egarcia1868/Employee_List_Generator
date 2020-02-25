@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-let employeeList = [];
+// let employeeList = [];
 
 const questions = [{
   type: "input",
@@ -85,8 +85,8 @@ const engineerQuestions = [{
 function init() {
   inquirer
   .prompt(questions).then((ans) => {
-    employeeList.push(new Manager(ans.manName, ans.manID, ans.manEmail, ans.manOffice));
-    render.renderManager();
+    // employeeList.push(new Manager(ans.manName, ans.manID, ans.manEmail, ans.manOffice));
+    render.renderManager;
     if (ans.empType === "Intern") {
       intQuestions();
     } else if (ans.empType === "Engineer") {      
@@ -98,8 +98,8 @@ function init() {
 function intQuestions() {
   inquirer
   .prompt(internQuestions).then((ans) => {
-    employeeList.push(new Intern(ans.intName, ans.intID, ans.intEmail, ans.intSchool));
-    render.renderIntern();
+    // employeeList.push(new Intern(ans.intName, ans.intID, ans.intEmail, ans.intSchool));
+    render.renderIntern;
     if (ans.intEmpType === "Intern") {
       // generate and populate the class and go to next input
       intQuestions();
@@ -108,7 +108,7 @@ function intQuestions() {
       engQuestions();
     } else if (ans.intEmpType === "I don't want to add any more team members") {
       //move on to generate
-      render.renderMain();
+      return;
     }
   })
 }
@@ -116,8 +116,8 @@ function intQuestions() {
 function engQuestions() {   
   inquirer
   .prompt(engineerQuestions).then((ans) => {
-    employeeList.push(new Engineer(ans.engName, ans.engID, ans.engEmail, ans.engGH));
-    render.renderEngineer();
+    // employeeList.push(new Engineer(ans.engName, ans.engID, ans.engEmail, ans.engGH));
+    render.renderEngineer;
     if (ans.engEmpType === "Intern") {
       // generate and populate the class and go to next input
       intQuestions();
@@ -126,7 +126,7 @@ function engQuestions() {
       engQuestions();
     } else if (ans.engEmpType === "I don't want to add any more team members") {
       //move on to generate
-      renderMain();
+      return;
     }
   })
 }
