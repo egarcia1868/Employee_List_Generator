@@ -86,6 +86,7 @@ function init() {
   inquirer
   .prompt(questions).then((ans) => {
     employeeList.push(new Manager(ans.manName, ans.manID, ans.manEmail, ans.manOffice));
+    render.renderManager();
     if (ans.empType === "Intern") {
       intQuestions();
     } else if (ans.empType === "Engineer") {      
@@ -98,6 +99,7 @@ function intQuestions() {
   inquirer
   .prompt(internQuestions).then((ans) => {
     employeeList.push(new Intern(ans.intName, ans.intID, ans.intEmail, ans.intSchool));
+    render.renderIntern();
     if (ans.intEmpType === "Intern") {
       // generate and populate the class and go to next input
       intQuestions();
@@ -106,6 +108,7 @@ function intQuestions() {
       engQuestions();
     } else if (ans.intEmpType === "I don't want to add any more team members") {
       //move on to generate
+      render.renderMain();
     }
   })
 }
@@ -114,6 +117,7 @@ function engQuestions() {
   inquirer
   .prompt(engineerQuestions).then((ans) => {
     employeeList.push(new Engineer(ans.engName, ans.engID, ans.engEmail, ans.engGH));
+    render.renderEngineer();
     if (ans.engEmpType === "Intern") {
       // generate and populate the class and go to next input
       intQuestions();
@@ -122,6 +126,7 @@ function engQuestions() {
       engQuestions();
     } else if (ans.engEmpType === "I don't want to add any more team members") {
       //move on to generate
+      renderMain();
     }
   })
 }
