@@ -11,7 +11,7 @@ An easy employee roster generator built by simply answering a series of question
 
 ### Screenshot
 
-![Screenshot!](/assets/Employees.png?raw=true "Screenshot of how the generated employees display")
+![Screenshot!](/Assets/Employees.png?raw=true "Screenshot of how the generated employees display")
 This is how the generated employee list would look if you entered a manager, 2 engineers, and 2 interns.
 
 
