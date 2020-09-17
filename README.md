@@ -1,4 +1,4 @@
-# Employee_List_Generator
+# Employee List Generator
 
 An easy employee roster generator built by simply answering a series of questions in the terminal.
 
@@ -26,5 +26,5 @@ This is how the generated employee list would look if you entered a manager, 2 e
 
 ## Acknowledgments
 
-* Big ups to my mentor, Calvin Carter for help throughout the production of this and many of my other projects.
+* Big ups to my mentor, Calvin Carter, for help throughout the production of this and many of my other projects.
 * Tons of help for this was found at w3schools (https://www.w3schools.com/), mozilla (https://developer.mozilla.org/), and various googleables
